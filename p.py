@@ -216,7 +216,8 @@ def create_bike_data_animation(bike_data, output_file='vancouver_bike_viz.mp4'):
         map_scatter.set_array(np.array(colors_data))
         
         return (title, time_line, time_scatter, map_scatter, *bar_container)
-    
+    writer = animation.FFMpegWriter(fps=5, metadata=dict(artist='Vancouver Bike Data Viz'), 
+                              bitrate=1800, verbose=True)
     # Add a footer with data source information
     plt.figtext(0.5, 0.01, 'Data source: City of Vancouver Bike Counts', 
                ha='center', fontsize=10, style='italic')
@@ -262,64 +263,6 @@ def main(pdf_path=None, output_file='vancouver_bike_viz.mp4'):
     
     print(f"Visualization completed. Output saved to {output_file}")
 
-def create_sample_data():
-    """
-    Create sample data if no PDF is provided
-    """
-    # Create date range for past 10 years with monthly data
-    dates = pd.date_range(start='2013-01-01', end='2023-12-31', freq='M')
-    
-    # List of bike routes in Vancouver
-    routes = [
-        'Burrard Bridge', 
-        'Hornby Street',
-        'Dunsmuir Street',
-        'Dunsmuir Viaduct',
-        'Canada Line',
-        'Union and Hawks',
-        'Lions Gate',
-        'Science World',
-        '10th and Clark',
-        'Point Grey Road'
-    ]
-    
-    # Create simulated data
-    data = []
-    for date in dates:
-        # Add seasonal variation - more cyclists in summer, fewer in winter
-        month = date.month
-        season_factor = 1.0 + 0.8 * np.sin((month - 1) * np.pi / 6)  # Peak in July
-        
-        # Add year-over-year growth trend
-        year_factor = 1.0 + 0.1 * (date.year - 2013)  # 10% growth per year
-        
-        # Generate data for each route
-        for route in routes:
-            # Base volume depends on route popularity
-            if route == 'Burrard Bridge':
-                base_volume = np.random.normal(120000, 20000)  # Highest traffic
-            elif route in ['Hornby Street', 'Dunsmuir Street']:
-                base_volume = np.random.normal(60000, 10000)  # High traffic
-            elif route in ['Canada Line', 'Science World']:
-                base_volume = np.random.normal(40000, 7000)  # Medium traffic
-            else:
-                base_volume = np.random.normal(20000, 5000)  # Lower traffic
-            
-            # Calculate monthly count with seasonal and year factors
-            monthly_count = int(base_volume * season_factor * year_factor)
-            
-            # Add some randomness
-            monthly_count = max(1000, int(monthly_count * np.random.normal(1, 0.15)))
-            
-            data.append({
-                'Date': date,
-                'Year': str(date.year),
-                'Month': date.strftime('%b'),
-                'Route': route,
-                'Count': monthly_count
-            })
-    
-    return pd.DataFrame(data)
 
 if __name__ == "__main__":
     import sys
