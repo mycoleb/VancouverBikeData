@@ -1,4 +1,5 @@
-Please note that all of this data is only up to date for before April 2025. I plan to finish updating this project before December 20th
+Please note that all of this data is only up to date for before April 2025. I plan to add more updates between now and January 4th
+
 
 
 
