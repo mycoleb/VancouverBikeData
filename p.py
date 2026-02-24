@@ -10,7 +10,7 @@ import os
 from matplotlib.gridspec import GridSpec
 from shapely.geometry import LineString
 
-# Import the PDF extraction code we created earlier
+# Import the PDF extraction code I created earlier
 from pdfex import main as extract_pdf_data
 
 def create_bike_data_animation(bike_data, output_file='vancouver_bike_viz.mp4'):
@@ -57,13 +57,7 @@ def create_bike_data_animation(bike_data, output_file='vancouver_bike_viz.mp4'):
         'Point Grey Road': (-123.165, 49.272)
     }
     
-    # Fill in any missing routes with random coordinates in Vancouver
-    for route in unique_routes:
-        if route not in route_coords:
-            # Generate random coordinates within Vancouver bounds
-            lon = np.random.uniform(-123.20, -123.03)
-            lat = np.random.uniform(49.24, 49.32)
-            route_coords[route] = (lon, lat)
+    # TODO Fill in any missing routes 
     
     # Plot Vancouver shoreline (simplified)
     shoreline_x = [-123.21, -123.21, -123.19, -123.17, -123.16, -123.14, -123.12, 
