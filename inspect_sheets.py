@@ -67,7 +67,7 @@ def inspect_specific_sheet(excel_path, sheet_name):
         sheet_name: Name of the sheet to inspect
     """
     try:
-        logger.info(f"Performing detailed inspection of sheet: {sheet_name}")
+        logger.info(f"Now performing detailed inspection of sheet: {sheet_name}")
         
         # Read a small sample (first 10 rows) to get a glimpse
         df_sample = pd.read_excel(excel_path, sheet_name=sheet_name, nrows=10)
