@@ -17,9 +17,6 @@ Requirements:
 Usage:
 python runner.py [data_path] [output_file] [--format {pdf,excel}]
 
-If data_path is not provided, sample data will be used.
-If output_file is not provided, the default 'vancouver_bike_viz.mp4' will be used.
-The format parameter is optional and will be inferred from the file extension if not provided.
 """
 
 import os
@@ -104,7 +101,7 @@ def determine_file_type(file_path):
         return None
 
 def main():
-    # Set up argument parsing
+    # argument parsing
     parser = argparse.ArgumentParser(description='Create bike data visualization from PDF or Excel.')
     parser.add_argument('data_path', nargs='?', default=None, help='Path to the PDF or Excel file')
     parser.add_argument('output_file', nargs='?', default='vancouver_bike_viz.mp4', 
@@ -127,6 +124,7 @@ def main():
     file_type = args.format if args.format else determine_file_type(data_path)
     
     # Extract data based on file type or use sample data
+    #TODO I check if it's a pdf or excel file twice. I should make my code more efficient.
     if data_path and os.path.exists(data_path):
         logger.info(f"Using data from {data_path}")
         
