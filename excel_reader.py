@@ -46,7 +46,7 @@ def extract_data_from_excel(excel_path):
     logger.info(f"Extracting data from {excel_path}...")
     
     try:
-        # Determine the engine based on file extension
+        # I can use the file extension to know what type of engine we're dealing with
         engine = 'openpyxl' if excel_path.endswith('.xlsx') else 'xlrd'
         
         # List all sheets
